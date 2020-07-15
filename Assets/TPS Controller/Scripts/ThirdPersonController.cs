@@ -7,7 +7,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private float MouseX = 0f;
     private Vector3 InputVector = Vector3.zero;
-    private float MoveSpeed = 10f;
+    private float MoveSpeed = 5f;
     private float YSpeed = 0f;
     [SerializeField]
     private CharacterController character;
@@ -43,12 +43,14 @@ public class ThirdPersonController : MonoBehaviour
         animator.SetBool("Grounded", character.isGrounded);
         animator.SetInteger("Vspeed", (int)InputVector.z);
 
-        if(Input.GetKey(KeyCode.LeftShift)&&0<InputVector.z)
+        if(Input.GetKey(KeyCode.LeftShift))
         {
-            MoveSpeed = 20;
+            animator.SetBool("Running", true);
+            MoveSpeed = 10;
         }
-        else
+        else if(0<InputVector.z)
         {
+            animator.SetBool("Running", false);
             MoveSpeed = 5;
         }
         //점프

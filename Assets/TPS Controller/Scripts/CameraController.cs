@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private GameObject player;
+    private float MouseX;
+    private float MouseY;
 
-    // Start is called before the first frame update
-    void Start()
+    public GameObject Target;
+
+    private void LateUpdate()
     {
-        player = GameObject.Find("Player");
+        MouseX += Input.GetAxisRaw("Mouse X") * 120f * Time.deltaTime;
+        MouseY -= Input.GetAxisRaw("Mouse Y") * 120f * Time.deltaTime;
+        MouseY = Mathf.Clamp(MouseY, -25f, 60f);
+
+        transform.rotation = Quaternion.Euler(MouseY, MouseX, 0);
+        transform.position=(Target.transform.position-transform.rotation*new Vector3(0,0,15));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.LookAt(player.transform.position);
-    }
-}
+    
+    //void Start()
+    //{
+    //    player = GameObject.Find("Player");
+    //}
+    //
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    transform.LookAt(player.transform.position);
+    //}
+}   
