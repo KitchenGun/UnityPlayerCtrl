@@ -21,8 +21,6 @@ public class ThirdPersonController : MonoBehaviour
 
     private void Update()
     {
-        
-
         //회전
         MouseX += Input.GetAxisRaw("Mouse X") * 120f * Time.deltaTime;
         Quaternion q = Quaternion.Euler(0, MouseX, 0);
